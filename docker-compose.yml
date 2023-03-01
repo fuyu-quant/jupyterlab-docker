@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  jupyterlab:
+    build:
+      context: ./jupyterlab
+      dockerfile: Dockerfile
+    container_name: ds_mlops_jupyterlab
+    restart: always  # コンテナが停止した時に常に再起動する設定
+    entrypoint: >
+      jupyter-lab
+      --allow-root
+      --ip=0.0.0.0
+      --port=8080
+      --no-browser
+      --NotebookApp.token=''
+      --notebook-dir=/workspace
+    expose:
+      # コンテナ側のポート
+      # https://tkzo.jp/blog/difference-between-ports-and-expose-in-docker-compose/
+      - "8080"
+    ports:
+      # アクセスIP(ここでは127.0.0.1なのでローカルループバックアドレス)からのみ8050ポートへの接続が許可され，コンテナ側の8050ポートへの接続が許可される
+      # https://tkzo.jp/blog/difference-between-ports-and-expose-in-docker-compose/
+      - "127.0.0.1:8080:8080"  
+    volumes:
+      - /Users/tanakatouma/Documents/Docker_volumes/ds_mlops/root_jupyter:/root/.jupyter
+      - /Users/tanakatouma/Documents/Docker_volumes/ds_mlops/workspace:/workspace
+     
+
+
+#secrets:
+#  user_ssh_key:
+#    file: $SSH_KEY_PATH
