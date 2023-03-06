@@ -24,8 +24,9 @@ services:
       # https://tkzo.jp/blog/difference-between-ports-and-expose-in-docker-compose/
       - "127.0.0.1:8080:8080"  
     volumes:
-      - /Users/tanakatouma/Documents/Docker_volumes/ds_mlops/root_jupyter:/root/.jupyter
-      - /Users/tanakatouma/Documents/Docker_volumes/ds_mlops/workspace:/workspace
+      - /Users/tanakatouma/vscode/jupyterlab-docker/src/:/root/src/
+      - /Users/tanakatouma/Documents/Docker_volumes/jupyterlab-docker/root_jupyter:/root/.jupyter
+      - /Users/tanakatouma/Documents/Docker_volumes/jupyterlab-docker/workspace:/workspace
      
 
 
